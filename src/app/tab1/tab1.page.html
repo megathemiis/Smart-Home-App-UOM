@@ -1,17 +1,140 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Smart Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col sizeSm = "2">
+        <ion-card>
+          <img src="../../assets/GIFs/high-temp.gif" />
+          <ion-card-header>
+            <ion-card-subtitle>Εσωτερικός</ion-card-subtitle>
+            <ion-card-title>Θερμοκρασία</ion-card-title>
+          </ion-card-header>
+          <ion-card-content style="font-size: xx-large;">
+            {{(this.tempData[0]) ? this.tempData[0].field6 : ''}}°C
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col sizeSm = "2">
+        <ion-card>
+          <img 
+          style="filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(210deg);" 
+          src="../../assets/GIFs/low-temp.gif" />
+          <ion-card-header>
+            <ion-card-subtitle>Εξωτερικός</ion-card-subtitle>
+            <ion-card-title>Θερμοκρασία</ion-card-title>
+          </ion-card-header>
+          <ion-card-content style="font-size: xx-large;">
+            {{(this.tempData[0]) ? this.tempData[0].field1 : ''}} °C
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <ion-row>
+      <ion-col sizeSm = "2">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Έξυπνος Διακόπτης</ion-card-title>
+          </ion-card-header>
+          <ion-card-content style="font-size: xx-large;">
+            <ion-toggle (ionChange)="smartONOFF()"></ion-toggle>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col sizeSm = "2">
+        <ion-card>
+          <img 
+          style="filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(59deg);" 
+          src="../../assets/GIFs/gas.gif" />
+          <ion-card-header>
+            <ion-card-title>Ανιχνευτής Καπνού</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{(this.tempData[0]) ? this.tempData[0].field5 : ''}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col sizeSm = "2">
+        <ion-card>
+          <ion-card-content>
+            <ion-icon style="font-size: 68px;" name="bulb-outline"></ion-icon>
+            <br>
+           <b style="font-size: 16px;">Συμβουλή:</b> 
+          <br> 
+          <br>
+          Αν η ένδειξη του αισθητήρα ξεπερνά το 400, υπάρχει καπνός στο χώρο!
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col sizeSm = "2">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Εσωτερικός</ion-card-subtitle>
+            <ion-card-title>Υγρασία</ion-card-title>
+          </ion-card-header>
+          <ion-card-content style="font-size: xx-large;">
+            {{(this.tempData[0]) ? this.tempData[0].field7 : ''}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col sizeSm = "2">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Εξωτερικός</ion-card-subtitle>
+            <ion-card-title>Υγρασία</ion-card-title>
+          </ion-card-header>
+          <ion-card-content style="font-size: xx-large;">
+            {{(this.tempData[0]) ? this.tempData[0].field2 : ''}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col sizeSm = "2">
+        <ion-card>
+          <img src="../../assets/GIFs/lock.gif" />
+          <ion-card-header>
+            <ion-card-title>Είσοδος</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            
+            <p *ngIf="loaded && this.tempData[0].field4 === '0.00'">Η πόρτα είναι κλειστή</p>
+            <b *ngIf="loaded && this.tempData[0].field4 === '1.00'">Η πόρτα είναι ανοιχτή!</b>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col sizeSm = "2">
+        <ion-card>
+          <img 
+          style="filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(180deg);" 
+          src="../../assets/GIFs/rain.gif" />
+          <ion-card-header>
+            <ion-card-title>Βροχόπτωση</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p *ngIf="loaded && this.tempData[0].field3 === '0.00'">Δεν εντοπίστηκε βροχόπτωση</p>
+            <b *ngIf="loaded && this.tempData[0].field3 === '1.00'">Eντοπίστηκε βροχόπτωση</b>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <br><br><br>
 </ion-content>
